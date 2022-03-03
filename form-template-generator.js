@@ -40,7 +40,7 @@ function setTemplateSignatures() {
   signatures.forEach((signature, i) => {
     let sid = ""
     if (signature.getElementsByClassName("sform_sig") != null) {
-      sid = signature.getElementsByClassName("sform_sig")[0].id
+      sid = signature.getElementsByClassName("sform_sig")[0].field_name
     }
     signature.outerHTML = "{{" + sid + "}}"
   })
