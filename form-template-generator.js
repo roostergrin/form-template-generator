@@ -56,8 +56,8 @@ function hideSubmit() {
 }
 
 function timestamp() {
-  let date = new Date(Date.now()).toUTCString()
+  let date = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles",})
   let script = document.createElement("script")
-  script.innerHTML = "// this template was generated on: " + date
+  script.innerHTML = "// this template was generated on: " + date + " PT"
   document.head.appendChild(script)
 }
