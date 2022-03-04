@@ -1,6 +1,7 @@
 function generateTemplate() {
   setTemplateInputs()
   setTemplateSignatures()
+  hideSubmit()
   timestamp()
   generateFile()
 }
@@ -44,6 +45,11 @@ function setTemplateSignatures() {
     }
     signature.outerHTML = "{{" + sid + "}}"
   })
+}
+
+function hideSubmit() {
+  document.querySelectorAll("input[type=submit]")[0].style.display =
+    "none"
 }
 
 function timestamp() {
