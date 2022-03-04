@@ -1,4 +1,5 @@
 function generateTemplate() {
+  removeFormAction()
   setTemplateInputs()
   setTemplateSignatures()
   hideSubmit()
@@ -17,6 +18,10 @@ function generateFile() {
   )
   a.download = newFilename
   a.click()
+}
+
+function removeFormAction() {
+  document.getElementsByTagName("form")[0].action = ""
 }
 
 function setTemplateInputs(input) {
