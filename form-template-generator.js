@@ -43,12 +43,10 @@ function setTemplateInputs(input) {
 
 function setTemplateSignatures() {
   let signatures = [...document.getElementsByClassName("signature")]
-  signatures.forEach((signature, i) => {
-    let sid = ""
-    if (signature.getElementsByClassName("sform_sig") != null) {
-      sid = signature.getElementsByClassName("sform_sig")[0].field_name
-    }
-    signature.outerHTML = "{{" + sid + "}}"
+  signatures.forEach((signature) => {
+    let inputs = [...signature.getElementsByTagName("input")]
+    let input = inputs.filter((input) => input.value == "")[0]
+    signature.outerHTML = "{{" + input.name + "}}"
   })
 }
 
