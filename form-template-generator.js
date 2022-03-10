@@ -1,6 +1,7 @@
 function generateTemplate() {
   removeFormAction()
   setTemplateInputs()
+  appendCheckboxAndRadioScripts()
   setTemplateSignatures()
   hideSubmit()
   timestamp()
@@ -32,13 +33,32 @@ function setTemplateInputs(input) {
         input.setAttribute("placeholder", "{{" + input.name + "}}")
         break
       case "checkbox":
-        input.dataset.checked = "{{" + input.name + "}}"
+        input.setAttribute("x-sel", "{{" + input.name + "}}")
         break
       case "radio":
-        input.dataset.checked = "{{" + input.name + "}}"
+        input.setAttribute("x-sel", "{{" + input.name + "}}")
         break
     }
   })
+}
+
+function appendCheckboxAndRadioScripts() {
+  let script1 = document.createElement("script")
+  script1.type = "text/javascript"
+  script1.src =
+    "https://d3nojzhs96djbd.cloudfront.net/static/js/jquery_1.11.0.min.js"
+  document.body.appendChild(script1)
+  let script2 = document.createElement("script")
+  script1.type = "text/javascript"
+  script2.innerHTML = `
+    $(document).ready(function(){
+      var RB = $("input[x-sel]");
+      for (var i=0; i < RB.length; i++) {
+        var R = $(RB[i]);
+        R.prop( "checked", R.attr("x-sel") == R.attr("value") ? true : false );
+      }
+    });`
+  document.body.appendChild(script2)
 }
 
 function setTemplateSignatures() {
@@ -56,7 +76,9 @@ function hideSubmit() {
 }
 
 function timestamp() {
-  let date = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles",})
+  let date = new Date().toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+  })
   let script = document.createElement("script")
   script.innerHTML = "// this template was generated on: " + date + " PT"
   document.head.appendChild(script)
