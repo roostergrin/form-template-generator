@@ -7,7 +7,7 @@ Add this script to the head
 ```jsx
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/gh/roostergrin/form-template-generator@0.0.3/form-template-generator.js"
+  src="https://cdn.jsdelivr.net/gh/roostergrin/form-template-generator@0.0.4/form-template-generator.js"
 ></script>
 ```
 
@@ -17,7 +17,7 @@ To generate a new form template:
 
 - open your form in a browser
 - open the console
-- run `generateTemplate()`
+- run `generateTemplate.run()`
 
 The new template file will automatically download to your default location!
 
