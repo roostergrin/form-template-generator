@@ -7,7 +7,7 @@ Add this script to the head
 ```jsx
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/gh/roostergrin/form-template-generator@0.0.4/form-template-generator.js"
+  src="https://cdn.jsdelivr.net/gh/roostergrin/form-template-generator@0.0.5/form-template-generator.js"
 ></script>
 ```
 
