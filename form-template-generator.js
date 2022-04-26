@@ -35,7 +35,7 @@ let generateTemplate = (function () {
     inputs.forEach((input, i) => {
       switch (input.type) {
         case 'text':
-          input.setAttribute('placeholder', '{{' + input.name + '}}')
+          input.setAttribute('value', '{{' + input.name + '}}')
           break
         case 'checkbox':
           input.setAttribute('x-sel', '{{' + input.name + '}}')
