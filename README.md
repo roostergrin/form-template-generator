@@ -7,7 +7,7 @@ Add this script to the head
 ```jsx
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/gh/roostergrin/form-template-generator@0.0.5/form-template-generator.js"
+  src="https://cdn.jsdelivr.net/gh/roostergrin/form-template-generator@0.0.6/form-template-generator.js"
 ></script>
 ```
 
@@ -23,7 +23,17 @@ The new template file will automatically download to your default location!
 
 ## Warnings
 
-The template generator doesn't yet handle `<select>` elements. If you have them, you have to update the generated template by hand:
+### selects
 
-- remove `<select class="form-control" name="X" id="X" value="X">` and all of its internal `<option>` elements
-- replace with `<input type="text" name="X" id="X" value="{{X}}" />`
+The template generator replaces `<select>` elements with `<input>` elements. It's likely your formatting will break.
+
+You can override by putting a class on the containing div and using css along these lines:
+
+```
+.containingDiv input {
+  max-width: 3rem;
+  float: unset !important;
+  padding: unset !important;
+  margin: unset !important;
+}
+```

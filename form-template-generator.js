@@ -5,6 +5,7 @@ let generateTemplate = (function () {
     removeFormAction()
     setTemplateInputs()
     appendCheckboxAndRadioScripts()
+    replaceSelects()
     setTemplateSignatures()
     hideSubmit()
     timestamp()
@@ -66,11 +67,28 @@ let generateTemplate = (function () {
     document.body.appendChild(script2)
   }
 
+  function replaceSelects() {
+    let selects = [...document.getElementsByTagName('select')]
+    selects.forEach((select) => {
+      // make a new input / text element
+      // id and value from select
+      // stick it in the dom before select
+      // delete select
+      const input = document.createElement('input')
+      input.type = 'text'
+      input.setAttribute('id', '{{' + select.id + '}}')
+      input.setAttribute('value', '{{' + select.name + '}}')
+      parent = select.parentNode
+      parent.insertBefore(input, select)
+      select.remove()
+    })
+  }
+
   function setTemplateSignatures() {
     let signatures = [...document.getElementsByClassName('signature')]
-    signatures.forEach(signature => {
+    signatures.forEach((signature) => {
       let inputs = [...signature.getElementsByTagName('input')]
-      let input = inputs.filter(input => input.value == '')[0]
+      let input = inputs.filter((input) => input.value == '')[0]
       signature.outerHTML = '{{' + input.name + '}}'
     })
   }
