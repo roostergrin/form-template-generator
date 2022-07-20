@@ -37,3 +37,7 @@ You can override by putting a class on the containing div and using css along th
   margin: unset !important;
 }
 ```
+
+### textareas
+
+The template generator doesn't work with `textarea` yet.
