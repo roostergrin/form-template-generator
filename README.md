@@ -40,4 +40,11 @@ You can override by putting a class on the containing div and using css along th
 
 ### textareas
 
-The template generator doesn't work with `textarea` yet.
+The template generator doesn't work with `textarea`.
+
+### file
+
+The template generator doesn't work with `type=file`.
+
+Ex: https://formsroostergrin.com/impressionsorthodontics/Virtual-page/index.html
+
