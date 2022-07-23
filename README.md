@@ -42,9 +42,14 @@ You can override by putting a class on the containing div and using css along th
 
 The template generator doesn't work with `textarea`.
 
+### date
+
+The template generator doesn't work with `type=date`.
+
 ### file
 
 The template generator doesn't work with `type=file`.
 
 Ex: https://formsroostergrin.com/impressionsorthodontics/Virtual-page/index.html
+
 
