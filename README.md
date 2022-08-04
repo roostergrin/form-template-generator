@@ -23,6 +23,10 @@ The new template file will automatically download to your default location!
 
 ## Warnings
 
+### number
+
+The template generator doesn't work with `type=number`.
+
 ### selects
 
 The template generator replaces `<select>` elements with `<input>` elements. It's likely your formatting will break.
