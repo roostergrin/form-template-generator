@@ -1,5 +1,5 @@
 // module pattern to avoid polluting the global namespace
-// to use the script, use generateIDs.run()
+// to use the script, use generateTemplate.run()
 let generateTemplate = (function () {
   function run() {
     removeFormAction()
