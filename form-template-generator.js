@@ -13,6 +13,19 @@ let generateTemplate = (function () {
     generateFile()
   }
 
+  function runpdf() {
+    removeFormAction()
+    handleInputs()
+    handleTextareas()
+    handleSelects()
+    handleSignatures()
+    appendCheckboxAndRadioScripts()
+    hideSubmit()
+    updateStyles()
+    addTimestamp()
+    generateFile()
+  }
+
   function removeFormAction() {
     document.getElementsByTagName('form')[0].action = ''
   }
@@ -85,18 +98,64 @@ let generateTemplate = (function () {
     let script2 = document.createElement('script')
     script2.type = 'text/javascript'
     script2.innerHTML = `
-      $(document).ready(function(){
-        var RB = $("input[x-sel]");
-        for (var i=0; i < RB.length; i++) {
-          var R = $(RB[i]);
-          R.prop( "checked", R.attr("x-sel") == R.attr("value") ? true : false );
-        }
-      });`
+    $(document).ready(function(){
+      var RB = $("input[x-sel]");
+      for (var i=0; i < RB.length; i++) {
+        var R = $(RB[i]);
+        R.prop( "checked", R.attr("x-sel") == R.attr("value") ? true : false );
+      }
+    });`
     document.body.appendChild(script2)
   }
 
   function hideSubmit() {
-    document.querySelectorAll('input[type=submit]')[0].style.display = 'none'
+    document.querySelectorAll('input[type=submit]')[0].style.display =
+      'none'
+  }
+
+  function updateStyles() {
+    // to get luxsci to convert to pdf
+    // - remove all media queries
+    // - remove .container and .page styling
+    // - add webkit for flex
+
+    // create a new style element called updatedStyles
+    // add all the rules you want to keep (and add webkit to any rules with flex)
+    // delete all style tags
+    // append updatedStyles
+
+    let updatedStyles = document.createElement('style')
+    updatedStyles.innerHTML = ''
+
+    let sheets = document.styleSheets
+
+    // walk through css sheets
+    for (i = 0; i < sheets.length; i++) {
+      // get all rules
+      rules = sheets[i].cssRules
+
+      // walk through rules
+      for (j = rules.length - 1; j > -1; j--) {
+        if (
+          !(rules[j] instanceof CSSMediaRule) &&
+          rules[j].selectorText !== '.container' &&
+          rules[j].selectorText !== '.page'
+        ) {
+          updatedStyles.innerHTML += rules[j].cssText
+          if (rules[j].cssText.includes('display: flex')) {
+            updatedStyles.innerHTML = updatedStyles.innerHTML.slice(0, -1) // remove trailing '}'
+            updatedStyles.innerHTML += 'display: -webkit-box;}' // luxsci needs this to do flex
+          }
+        }
+      }
+    }
+
+    let styles = document.getElementsByTagName('style')
+    while (styles[0]) {
+      styles[0].remove()
+    }
+
+    document.head.appendChild(updatedStyles)
   }
 
   function addTimestamp() {
@@ -104,7 +163,8 @@ let generateTemplate = (function () {
       timeZone: 'America/Los_Angeles'
     })
     let script = document.createElement('script')
-    script.innerHTML = '// this template was generated on: ' + date + ' PT'
+    script.innerHTML =
+      '// this template was generated on: ' + date + ' PT'
     document.head.appendChild(script)
   }
 
@@ -124,6 +184,7 @@ let generateTemplate = (function () {
   }
 
   return {
-    run
+    run,
+    runpdf
   }
 })()
