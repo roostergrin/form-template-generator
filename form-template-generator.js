@@ -37,6 +37,9 @@ let generateTemplate = (function () {
         case 'text':
           input.setAttribute('value', '{{' + input.name + '}}')
           break
+        case 'email':
+          input.setAttribute('value', '{{' + input.name + '}}')
+          break
         case 'number':
           thingReplacer(input)
           break
